@@ -12,24 +12,73 @@ import { Component } from '@angular/core';
             <h1 [innerHTML]='hero.fname'></h1>
             <h1 bind-innerHTML='hero.fname'></h1>
             <h1 [class]='hero.city'>Gotham City</h1>
-            <h1>Gotham City</h1>
+            <h1 
+            (click)='clickHandler($event)' 
+            (mouseup)='clickHandler($event)'
+            (mousedown)='clickHandler($event)'
+            (mouseover)='clickHandler($event)'
+            (mouseout)='clickHandler($event)'
+            
+            >Gotham City</h1>
         <hr/>
     <h1>{{ hero.cities.firstcity }}</h1>
     <h1>{{ hero?.contacts?.fourthcity }}</h1>
     <hr/>
+    <h2 [class.redBox]='power < 5'> Box </h2>
     <button (click)='clickHandler($event)'> Click Button 1 </button>
     <button on-click='clickHandler($event)'> Click Button 2 </button>
     <button (keydown.space)='clickHandler($event)'> Click Button 3 </button>
+    <hr/>
+    <input #ipbox type='text' [value]='title' />
+    <h1>{{ ipbox.value }}</h1>
+    <hr/>
+    <input ref-ibm  type='text' [value]='hero.lname' />
+    <h1>{{ ibm.value }}</h1>
+
+    <hr/>
+
+    <div class='box' *ngIf='power > 5'> Strong </div>
+    <div class='box' [hidden]='power > 5'> Recovering </div>
+    <input type='range' min='0' max='10' step='1' [(ngModel)]='power' />
+    <hr/>
+
+    <div class="boxer" [ngSwitch]='power'>
+        <p *ngSwitchCase='5' > Down  {{ power }} </p>
+        <p *ngSwitchCase='6' > Recovering {{ power }}</p>
+        <p *ngSwitchCase='7' > Low Amo  {{ power }}</p>
+        <p *ngSwitchCase='8' > Strong  {{ power }}</p>
+        <p *ngSwitchCase='9' > Stronger  {{ power }}</p>
+        <p *ngSwitchCase='10' > Unbeatable  {{ power }}</p>
+        <p *ngSwitchDefault > Out  {{ power }}</p>
+    </div>
+
     `,
     styles : [`
         .gotham{
             border : 2px solid red
         }
+        .redBox{
+            border : 2px solid red;
+            background-color : red;
+            opacity : 0.5;
+        }
+        .greenBox{
+            border : 2px solid green
+            background-color : green;
+            opacity : 0.5;
+        }
+        .box{
+            width : 100px;
+            height : 100px;
+            background-color : silver;
+            margin : auto;
+        }
     `]
 })
 export class Step1Component {
     title = 'Welcome to your life';
-    power = 5;
+    power = 6;
+    inmovie = true;
     herostyle = 'border: 2px solid red';
     saypower() {
         return 'I am Strong';
@@ -45,7 +94,16 @@ export class Step1Component {
         }
     };
     clickHandler(evt){
-        alert(evt.target.innerHTML);
+        /*
+        event.target
+        event.type
+        event.currentTarget
+        event.eventPhase
+        event.stopPropagation()
+        event.preventDefault();
+        */
+        // alert(evt.target.innerHTML);
+        console.log(evt.type);
     }
 
 }
