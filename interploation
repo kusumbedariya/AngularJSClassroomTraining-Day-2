@@ -1,0 +1,51 @@
+import { Component } from '@angular/core';
+
+@Component({
+    selector : 'app-step1',
+    template : `
+    <h1>{{ title }}</h1>
+    <h1>{{ 3*3+1 }}</h1>
+    <h1>{{ power < 2 }}</h1>
+    <h1>{{ saypower() }}</h1>
+        <hr/>
+            <h1>{{ hero.fname }}</h1>
+            <h1 [innerHTML]='hero.fname'></h1>
+            <h1 bind-innerHTML='hero.fname'></h1>
+            <h1 [class]='hero.city'>Gotham City</h1>
+            <h1>Gotham City</h1>
+        <hr/>
+    <h1>{{ hero.cities.firstcity }}</h1>
+    <h1>{{ hero?.contacts?.fourthcity }}</h1>
+    <hr/>
+    <button (click)='clickHandler($event)'> Click Button 1 </button>
+    <button on-click='clickHandler($event)'> Click Button 2 </button>
+    <button (keydown.space)='clickHandler($event)'> Click Button 3 </button>
+    `,
+    styles : [`
+        .gotham{
+            border : 2px solid red
+        }
+    `]
+})
+export class Step1Component {
+    title = 'Welcome to your life';
+    power = 5;
+    herostyle = 'border: 2px solid red';
+    saypower() {
+        return 'I am Strong';
+    };
+    hero = {
+        fname : 'Bruce',
+        lname : 'Wayne',
+        city : 'gotham',
+        cities : {
+            firstcity : 'pune',
+            secondcity : 'kolkata',
+            thirdcity : 'hyderabad'
+        }
+    };
+    clickHandler(evt){
+        alert(evt.target.innerHTML);
+    }
+
+}
