@@ -7,7 +7,7 @@ import { Component } from "@angular/core";
         <h1>Hello from parent</h1>
             <hr/>
         <input [(ngModel)]='title'/>
-        <app-child [childprop]='title'></app-child>
+        <app-child [childprop]='title' (childEvent)='parentEventHandler($event)' ></app-child>
     </div>
     `,
     styles : [`
@@ -17,4 +17,8 @@ import { Component } from "@angular/core";
 export class ParentComponent{
     title = 'Hello from parent'
     constructor(){}
+    parentEventHandler(evt){
+        // alert('Parent Got : '+evt);
+        this.title = evt;
+    }
 }
